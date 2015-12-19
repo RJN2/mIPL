@@ -1,14 +1,16 @@
 <head>
-  <title>mIPL</title>
+	<title>IPL scoreboard</title>
 </head>
-
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+	<h1>IPL Scoreboard</h1>
+	{{> ipl_table}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="ipl_table">
+	Players - {{playerCount}}
+	<ul>
+		{{#each player}}
+			<li>{{name}}: {{score}}</li>
+		{{/each}}
+	</ul>
 </template>
