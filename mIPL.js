@@ -4,17 +4,21 @@ if (Meteor.isClient) {
 	console.log("Hello client");
 	Template.ipl_table.helpers({
 		'player': function(){
-			return PlayersList.find()
+			return PlayersList.find({}, {sort: {score: -1, name: 1} });
 		},
 		'playerCount': function(){
-			return PlayersList.find().count()
+			return PlayersList.find().count();
 		},
 		'selectedClass': function(){
 			var playerID = this._id;
 			var selectedPlayer = Session.get('selectedPlayer');
 			if (playerID == selectedPlayer) {
-				return "selected"
+				return "selected";
 			}
+		},
+		showSelectedPlayer: function(){
+			var selectedPlayer = Session.get('selectedPlayer');
+			return PlayersList.findOne(selectedPlayer);
 		}
 	});
 
@@ -22,6 +26,14 @@ if (Meteor.isClient) {
 		'click .player': function(){
 			var playerID = this._id;
 			Session.set('selectedPlayer', playerID);
+		},
+		'click .increment': function(){
+			var selectedPlayer = Session.get('selectedPlayer');
+			PlayersList.update(selectedPlayer, {$inc: {score: 5}});
+		},
+		'click .decrement': function(){
+			var selectedPlayer = Session.get('selectedPlayer');
+			PlayersList.update(selectedPlayer, {$inc: {score: -5}});
 		}
 	});
 }
