@@ -47,11 +47,14 @@ if (Meteor.isClient) {
 		'submit form': function(event){
 			event.preventDefault();
 			var playerNameVar = event.target.playerName.value;
-			var playerScoreVar = event.target.playerScore.value;
+			var playerScoreVar = Number(event.target.playerScore.value);
+			var currentUserId = Meteor.userId();
 			PlayersList.insert({
 				name: playerNameVar,
-				score: playerScoreVar
+				score: playerScoreVar,
+				createdBy: currentUserId
 			});
+			console.log(playerScoreVar);
 			event.target.playerName.value = "";
 			event.target.playerScore.value = null;
 		}
