@@ -8,27 +8,28 @@
 </body>
 
 <template name="ipl_table">
-	Players - {{playerCount}}
-	<ul>
-		{{#each player}}
-			<li class="player {{selectedClass}}">{{name}}: {{score}}</li>
-		{{/each}}
-		{{#if showSelectedPlayer}}
-			<li>Selected Player: {{showSelectedPlayer.name}}</li>
-		{{/if}}
-	</ul>
-	<input type="button" class="increment" value="Give 5 Points">
-	<input type="button" class="decrement" value="Take 5 Points">
-	<input type="button" class="remove" value="Remove Player">
-	{{> addPlayerForm}}
+	{{#if currentUser}}
+		Players - {{playerCount}}
+		<ul>
+			{{#each player}}
+				<li class="player {{selectedClass}}">{{name}}: {{score}}</li>
+			{{/each}}
+			{{#if showSelectedPlayer}}
+				<li>Selected Player: {{showSelectedPlayer.name}}</li>
+			{{/if}}
+		</ul>
+		<input type="button" class="increment" value="Give 5 Points">
+		<input type="button" class="decrement" value="Take 5 Points">
+		<input type="button" class="remove" value="Remove Player">
+		{{> addPlayerForm}}
+	{{/if}}
 </template>
 
 <template name="addPlayerForm">
-	{{#if currentUser}}
-		<form>
-			<input type="text" name="playerName">
-			<input type="number" min="-10" max="10" name="playerScore">
-			<input type="submit" value="Add Player">
-		</form>
-	{{/if}}
+	<form>
+		<input type="text" name="playerName">
+		<input type="number" min="-10" max="10" name="playerScore">
+		<input type="submit" value="Add Player">
+	</form>
 </template>
+
