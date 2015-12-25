@@ -4,7 +4,10 @@ if (Meteor.isClient) {
 	console.log("Hello client");
 	Template.ipl_table.helpers({
 		'player': function(){
-			return PlayersList.find({}, {sort: {score: -1, name: 1} });
+			var currentUserId = Meteor.userId();
+			console.log(currentUserId);
+			return PlayersList.find({createdBy: currentUserId},
+									{sort: {score: -1, name: 1} });
 		},
 		'playerCount': function(){
 			return PlayersList.find().count();
@@ -63,4 +66,5 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 	console.log("Hello server");
+	console.log(PlayersList.find().fetch());
 }
