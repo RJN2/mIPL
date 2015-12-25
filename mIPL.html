@@ -2,6 +2,7 @@
 	<title>IPL scoreboard</title>
 </head>
 <body>
+	{{> loginButtons}}
 	<h1>IPL Scoreboard</h1>
 	{{> ipl_table}}
 </body>
@@ -23,9 +24,11 @@
 </template>
 
 <template name="addPlayerForm">
-	<form>
-		<input type="text" name="playerName">
-		<input type="number" min="-10" max="10" name="playerScore">
-		<input type="submit" value="Add Player">
-	</form>
+	{{#if currentUser}}
+		<form>
+			<input type="text" name="playerName">
+			<input type="number" min="-10" max="10" name="playerScore">
+			<input type="submit" value="Add Player">
+		</form>
+	{{/if}}
 </template>
