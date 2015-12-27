@@ -2,6 +2,7 @@
 	<title>IPL scoreboard</title>
 </head>
 <body>
+	<div id="render-target"></div>
 	{{> loginButtons}}
 	<h1>IPL Scoreboard</h1>
 	{{> ipl_table}}
@@ -10,6 +11,13 @@
 <template name="ipl_table">
 	{{#if currentUser}}
 		Players - {{playerCount}}
+		<table class="ipl_tbl">
+			<tbody>
+				<tr>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
 		<ul>
 			{{#each player}}
 				<li class="player {{selectedClass}}">{{name}}: {{score}}</li>

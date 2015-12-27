@@ -1,5 +1,12 @@
 Meteor.subscribe('thePlayers');
 
+Meteor.startup(function () {
+	// Use Meteor.startup to render the component after the page is ready
+	React.render(<App />, document.getElementById("render-target"));
+});
+
+
+
 Template.ipl_table.helpers({
 	'player': function(){
 		return PlayersList.find({}, {sort: {score: -1, name: 1} });
